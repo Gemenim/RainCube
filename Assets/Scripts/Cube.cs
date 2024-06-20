@@ -49,10 +49,7 @@ public class Cube : MonoBehaviour
 
     private void Changed()
     {
-        if (_canChange) 
-            _canChange = false;
-        else
-            _canChange = true;
+        _canChange = !_canChange;
     }
 
     private IEnumerator ReturneePool()
