@@ -1,14 +1,13 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CubeGenerator : MonoBehaviour
 {
     [SerializeField] private float _minDelay;
     [SerializeField] private float _maxDelay;
-    [SerializeField] private float _upperBoundX;
-    [SerializeField] private float _lowerBoundX;
-    [SerializeField] private float _upperBoundZ;
-    [SerializeField] private float _lowerBoundZ;
+    [SerializeField] private Vector2 _lowerBound;
+    [SerializeField] private Vector2 _upperBound;
     [SerializeField] private CubePool _pool;
 
     private void OnValidate()
@@ -27,20 +26,19 @@ public class CubeGenerator : MonoBehaviour
 
     private IEnumerator GenerateCube()
     {
-        var wait = new WaitForSeconds(SetRandomDelay());
-
         while (enabled)
         {
             Spawn();
-            wait = new WaitForSeconds(SetRandomDelay());
+            WaitForSeconds wait = new WaitForSeconds(SetRandomDelay());
+
             yield return wait;
         }
     }
 
     private void Spawn()
     {
-        float spawnPositionX = Random.Range(_upperBoundX, _lowerBoundX);
-        float spawnPositionZ = Random.Range(_upperBoundZ, _lowerBoundZ);
+        float spawnPositionX = Random.Range(_lowerBound.x, _upperBound.x);
+        float spawnPositionZ = Random.Range(_lowerBound.y, _upperBound.y);
         Vector3 spawnPoint = new Vector3(spawnPositionX, transform.position.y, spawnPositionZ);
         var cube = _pool.GetCube();
         cube.gameObject.SetActive(true);

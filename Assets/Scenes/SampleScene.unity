@@ -750,10 +750,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _minDelay: 0.1
   _maxDelay: 3
-  _upperBoundX: -15
-  _lowerBoundX: 15
-  _upperBoundZ: -15
-  _lowerBoundZ: 15
+  _lowerBound: {x: -15, y: -15}
+  _upperBound: {x: 15, y: 15}
   _pool: {fileID: 1205638002}
 --- !u!114 &1205638002
 MonoBehaviour:

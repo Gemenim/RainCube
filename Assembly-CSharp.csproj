@@ -689,11 +689,11 @@
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
-      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Recorder.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
+      <HintPath>Library\ScriptAssemblies\Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
@@ -737,8 +737,8 @@
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    <Reference Include="Unity.Recorder">
+      <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -749,14 +749,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.TextMeshPro.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Recorder">
-      <HintPath>Library\ScriptAssemblies\Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
