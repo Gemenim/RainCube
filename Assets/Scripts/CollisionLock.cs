@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class CollisionLock : MonoBehaviour
 {
-    [SerializeField] Color[] colors = { Color.red, Color.green, Color.blue, Color.yellow };
+    [SerializeField] private Color[] colors = { Color.red, Color.green, Color.blue, Color.yellow };
 
     private void OnCollisionEnter(Collision collision)
     {
