@@ -12,8 +12,6 @@ public class Cube : MonoBehaviour
     private Renderer _renderer;
     private bool _canChange = true;
 
-    public bool CanChange => _canChange;
-    
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -33,23 +31,18 @@ public class Cube : MonoBehaviour
     public void SetColor(Color color)
     {
         _renderer.material.color = color;
-        Changed();
+        _canChange = !_canChange;
     }
 
     public void ResetColor()
     {
         _renderer.material.color = _defaultColor;
-        Changed();
+        _canChange = !_canChange;
     }
 
     public void Removed()
     {
         StartCoroutine(ReturneePool());
-    }
-
-    private void Changed()
-    {
-        _canChange = !_canChange;
     }
 
     private IEnumerator ReturneePool()
@@ -58,17 +51,14 @@ public class Cube : MonoBehaviour
         WaitForSeconds seconds = new WaitForSeconds(lifetime);
         float life = 0;
 
-        while (true)
+        if (life >= lifetime)
         {
-            if (life >= lifetime)
-            {
-                ResetColor();
-                _pool.PutCube(this);
-            }
-
-            life += lifetime;
-
-            yield return seconds;
+            ResetColor();
+            _pool.PutCube(this);
         }
+
+        life += lifetime;
+
+        yield return seconds;
     }
 }
