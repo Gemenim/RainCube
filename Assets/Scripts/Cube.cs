@@ -23,21 +23,19 @@ public class Cube : MonoBehaviour
         _pool = cubePool;
     }
 
-    public void SetPosition(Vector3 position)
-    {
-        transform.position = position;
-    }
-
     public void SetColor(Color color)
     {
-        _renderer.material.color = color;
-        _canChange = !_canChange;
+        if (_canChange)
+        {
+            _renderer.material.color = color;
+            _canChange = false;
+        }
     }
 
     public void ResetColor()
     {
         _renderer.material.color = _defaultColor;
-        _canChange = !_canChange;
+        _canChange = true;
     }
 
     public void Removed()
@@ -49,16 +47,10 @@ public class Cube : MonoBehaviour
     {
         float lifetime = Random.Range(_minLifetime, _maxLifetime);
         WaitForSeconds seconds = new WaitForSeconds(lifetime);
-        float life = 0;
-
-        if (life >= lifetime)
-        {
-            ResetColor();
-            _pool.PutCube(this);
-        }
-
-        life += lifetime;
 
         yield return seconds;
+
+        ResetColor();
+        _pool.PutCube(this);
     }
 }

@@ -28,9 +28,8 @@ public class CubeGenerator : MonoBehaviour
         while (enabled)
         {
             Spawn();
-            WaitForSeconds wait = new WaitForSeconds(SetRandomDelay());
 
-            yield return wait;
+            yield return new WaitForSeconds(SetRandomDelay());
         }
     }
 
@@ -46,8 +45,6 @@ public class CubeGenerator : MonoBehaviour
 
     private float SetRandomDelay()
     {
-        float delay = Random.Range(_minDelay, _maxDelay);
-
-        return delay;
+        return Random.Range(_minDelay, _maxDelay); ;
     }
 }
