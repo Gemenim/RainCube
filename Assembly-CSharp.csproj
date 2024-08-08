@@ -60,16 +60,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Bomb.cs" />
-    <Compile Include="Assets\Scripts\VeiwCountCubs.cs" />
-    <Compile Include="Assets\Scripts\BombPool.cs" />
-    <Compile Include="Assets\Scripts\VeiwCountBombActiv.cs" />
-    <Compile Include="Assets\Scripts\CubePool.cs" />
-    <Compile Include="Assets\Scripts\CollisionLock.cs" />
+    <Compile Include="Assets\Scripts\Drop.cs" />
+    <Compile Include="Assets\Scripts\ViewCountActiv.cs" />
+    <Compile Include="Assets\Scripts\Pool.cs" />
+    <Compile Include="Assets\Scripts\ColisionLock.cs" />
     <Compile Include="Assets\Scripts\CubeGenerator.cs" />
     <Compile Include="Assets\Scripts\BombGenerator.cs" />
     <Compile Include="Assets\Scripts\Cube.cs" />
-    <Compile Include="Assets\Scripts\ViewCountBombs.cs" />
-    <Compile Include="Assets\Scripts\VeiwCountCubeActiv.cs" />
+    <Compile Include="Assets\Scripts\ViewCountСreated.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

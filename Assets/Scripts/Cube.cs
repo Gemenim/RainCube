@@ -2,25 +2,19 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class Cube : MonoBehaviour
+public class Cube : Drop
 {
-    [SerializeField] private int _minLifetime = 2;
-    [SerializeField] private int _maxLifetime = 5;
-
-    private CubePool _pool;
+    private ColisionLock _colisionLock;
     private Color _defaultColor;
     private Renderer _renderer;
+    private BombGenerator _bombGenerator;
     private bool _canChange = true;
 
-    private void Start()
+    private void Awake()
     {
+        _colisionLock = GetComponent<ColisionLock>();
         _renderer = GetComponent<Renderer>();
         _defaultColor = _renderer.material.color;
-    }
-
-    public void SetPool(CubePool cubePool)
-    {
-        _pool = cubePool;
     }
 
     public void SetColor(Color color)
@@ -29,6 +23,7 @@ public class Cube : MonoBehaviour
         {
             _renderer.material.color = color;
             _canChange = false;
+            _colisionLock.enabled = true;
         }
     }
 
@@ -38,12 +33,12 @@ public class Cube : MonoBehaviour
         _canChange = true;
     }
 
-    public void Removed()
+    public override void SetBombGenerator(BombGenerator bombGenerator)
     {
-        StartCoroutine(ReturneePool());
+        _bombGenerator = bombGenerator;
     }
 
-    private IEnumerator ReturneePool()
+    protected override IEnumerator ReturneePool()
     {
         float lifetime = Random.Range(_minLifetime, _maxLifetime);
         WaitForSeconds seconds = new WaitForSeconds(lifetime);
@@ -51,6 +46,8 @@ public class Cube : MonoBehaviour
         yield return seconds;
 
         ResetColor();
-        _pool.PutCube(this);
+        _colisionLock.enabled = false;
+        _pool.Put(this);
+        _bombGenerator.Spawn(transform.position);
     }
 }

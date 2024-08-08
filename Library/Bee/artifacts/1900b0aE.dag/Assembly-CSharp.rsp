@@ -357,15 +357,13 @@
 -analyzer:"A:/Unity/Unity Hub/2022.3.12f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Scripts/Bomb.cs"
 "Assets/Scripts/BombGenerator.cs"
-"Assets/Scripts/BombPool.cs"
-"Assets/Scripts/CollisionLock.cs"
+"Assets/Scripts/ColisionLock.cs"
 "Assets/Scripts/Cube.cs"
 "Assets/Scripts/CubeGenerator.cs"
-"Assets/Scripts/CubePool.cs"
-"Assets/Scripts/VeiwCountBombActiv.cs"
-"Assets/Scripts/VeiwCountCubeActiv.cs"
-"Assets/Scripts/VeiwCountCubs.cs"
-"Assets/Scripts/ViewCountBombs.cs"
+"Assets/Scripts/Drop.cs"
+"Assets/Scripts/Pool.cs"
+"Assets/Scripts/ViewCountActiv.cs"
+"Assets/Scripts/ViewCountСreated.cs"
 -langversion:9.0
 
 /deterministic

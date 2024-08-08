@@ -1,19 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
-public class Bomb : MonoBehaviour
-{    
+public class Bomb : Drop
+{
     [SerializeField] private float _explosionRadius = 2;
     [SerializeField] private float _explosionForce = 5;
-    [SerializeField] private float _minLifetime = 2;
-    [SerializeField] private float _maxLifetime = 5;
- 
+
     private Material _material;
-    private float _startAlpha;
-    private BombPool _pool;
+    private Color _startAlpha;
 
     private void OnValidate()
     {
@@ -22,40 +18,23 @@ public class Bomb : MonoBehaviour
 
         if (_explosionForce < 0)
             _explosionForce = 0;
-
-        if (_minLifetime < 1)
-            _minLifetime = 1;
-
-        if (_maxLifetime <= _minLifetime)
-            _maxLifetime = _minLifetime + 1;
     }
 
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
-        _startAlpha = _material.color.a;
+        _startAlpha = _material.color;
     }
 
-    public void StartTimer()
+    private void ResetAlpha()
     {
-        StartCoroutine(Timer());
-    }
-
-    public void SetPool(BombPool pool)
-    {
-        _pool = pool;
-    }
-
-    public void ResetAlpha()
-    {
-        Color color = new Color(0, 0, 0, _startAlpha);
-        _material.color = color;
+        _material.color = _startAlpha;
     }
 
     private void Share(List<Rigidbody> cubes)
     {
         Explode(cubes);
-        _pool.PutBomb(this);
+        _pool.Put(this);
     }
 
     private void Explode(List<Rigidbody> raycasts)
@@ -82,12 +61,12 @@ public class Bomb : MonoBehaviour
 
     private void SetAlpha(float delta)
     {
-        float relationship = delta * _startAlpha;
-        Color color = new Color(0, 0, 0, _startAlpha - relationship);
+        float relationship = delta * _startAlpha.a;
+        Color color = new Color(_startAlpha.r, _startAlpha.g, _startAlpha.b, _startAlpha.a - relationship);
         _material.color = color;
     }
 
-    private IEnumerator Timer()
+    protected override IEnumerator ReturneePool()
     {
         float lifetime = Random.Range(_minLifetime, _maxLifetime);
         float life = 0;
@@ -96,7 +75,10 @@ public class Bomb : MonoBehaviour
         while (true)
         {
             if (life >= lifetime)
+            {
                 Share(TakeRigidbodyRaycast());
+                ResetAlpha();
+            }
 
             life += Time.deltaTime;
             SetAlpha(life / lifetime);

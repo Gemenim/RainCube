@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class BombGenerator : MonoBehaviour
 {
-    [SerializeField] private BombPool _pool;
+    [SerializeField] private Pool _pool;
 
     public void Spawn(Vector3 position)
     {
-        Bomb bomb = _pool.GetBomb();
+        Drop bomb = _pool.Get();
         bomb.gameObject.SetActive(true);
         bomb.transform.position = position;
-        bomb.StartTimer();
+        bomb.Removed();
     }
 }
