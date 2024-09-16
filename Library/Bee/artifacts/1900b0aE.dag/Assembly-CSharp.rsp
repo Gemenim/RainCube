@@ -361,8 +361,11 @@
 "Assets/Scripts/Cube.cs"
 "Assets/Scripts/CubeGenerator.cs"
 "Assets/Scripts/Drop.cs"
+"Assets/Scripts/Generator.cs"
 "Assets/Scripts/Pool.cs"
+"Assets/Scripts/View.cs"
 "Assets/Scripts/ViewCountActiv.cs"
+"Assets/Scripts/ViewCountGenerated.cs"
 "Assets/Scripts/ViewCountСreated.cs"
 -langversion:9.0
 

@@ -1,15 +1,22 @@
+using System;
 using UnityEngine;
 
-[RequireComponent(typeof(Cube))]
 public class ColisionLock : MonoBehaviour
 {
-    [SerializeField] private Color[] _colors = { Color.red, Color.green, Color.blue, Color.yellow };
     [SerializeField] private Cube _cube;
+    [SerializeField] private Color[] _colors = { Color.red, Color.green, Color.blue, Color.yellow };
+
+    private bool _isRanInto = true;
 
     private void OnCollisionEnter()
     {
-        Color color = _colors[Random.Range(0, _colors.Length)];
-        _cube.SetColor(color);
-        _cube.Removed();
+        if (_isRanInto)
+        {
+            Color color = _colors[UnityEngine.Random.Range(0, _colors.Length)];
+            _cube.SetColor(color);
+            _cube.Remove();
+        }
     }
+
+    public void SetAbilityCollide(bool value) => _isRanInto = value;
 }

@@ -1,14 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
-public class BombGenerator : MonoBehaviour
+public class BombGenerator : Generator
 {
-    [SerializeField] private Pool _pool;
-
-    public void Spawn(Vector3 position)
+    public void Creat(Vector3 position)
     {
-        Drop bomb = _pool.Get();
-        bomb.gameObject.SetActive(true);
-        bomb.transform.position = position;
-        bomb.Removed();
+        Drop drop = Spawn();
+        SetPosition(drop, position);
+        drop.Remove();
     }
 }

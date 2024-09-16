@@ -6,7 +6,7 @@ public abstract class Drop : MonoBehaviour
     [SerializeField] protected int _minLifetime = 2;
     [SerializeField] protected int _maxLifetime = 5;
 
-    protected Pool _pool;
+    protected Pool<Drop> _pool;
 
     private void OnValidate()
     {
@@ -17,16 +17,15 @@ public abstract class Drop : MonoBehaviour
             _maxLifetime = _minLifetime + 1;
     }
 
-    public void SetPool(Pool pool)
+    public void SetPool(Pool<Drop> pool)
     {
         _pool = pool;
     }
-    public void Removed()
+
+    public void Remove()
     {
         StartCoroutine(ReturneePool());
     }
-
-    public virtual void SetBombGenerator(BombGenerator bombGenerator) { }
 
     protected abstract IEnumerator ReturneePool();
 }

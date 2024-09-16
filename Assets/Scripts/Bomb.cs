@@ -34,7 +34,6 @@ public class Bomb : Drop
     private void Share(List<Rigidbody> cubes)
     {
         Explode(cubes);
-        _pool.Put(this);
     }
 
     private void Explode(List<Rigidbody> raycasts)
@@ -78,6 +77,7 @@ public class Bomb : Drop
             {
                 Share(TakeRigidbodyRaycast());
                 ResetAlpha();
+                _pool.Return(this);
             }
 
             life += Time.deltaTime;

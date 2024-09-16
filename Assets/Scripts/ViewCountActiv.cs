@@ -1,9 +1,10 @@
 using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class ViewCountActiv : MonoBehaviour
 {
-    [SerializeField] Pool _pool;
+    [SerializeField] Generator _generator;
 
     private TextMeshProUGUI _text;
 
@@ -14,12 +15,12 @@ public class ViewCountActiv : MonoBehaviour
 
     private void OnEnable()
     {
-        _pool.ChangeCiuntActiv += ChangeText;
+        _generator.ChangeCountActive += ChangeText;
     }
 
     private void OnDisable()
     {
-        _pool.ChangeCiuntActiv -= ChangeText;
+        _generator.ChangeCountActive -= ChangeText;
     }
 
     private void ChangeText(int count)

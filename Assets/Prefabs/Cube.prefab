@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8711480181312087038}
   - component: {fileID: 8438873875156099482}
   - component: {fileID: 4764460164366377320}
-  - component: {fileID: 3006387268289232342}
-  - component: {fileID: 5480161704720750733}
   - component: {fileID: 8999824243142576036}
+  - component: {fileID: -395572186402713347}
+  - component: {fileID: 4149051918593390914}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -108,38 +108,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3006387268289232342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311764740127809739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ac4178949aba4e4aac5748c98d8246b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minLifetime: 2
-  _maxLifetime: 5
---- !u!114 &5480161704720750733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6311764740127809739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e74749d5d39c8349b9fd92f87e6ca83, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _colors:
-  - {r: 1, g: 0, b: 0, a: 1}
-  - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 0, g: 0, b: 1, a: 1}
-  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  _cube: {fileID: 3006387268289232342}
 --- !u!54 &8999824243142576036
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,3 +135,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-395572186402713347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311764740127809739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ac4178949aba4e4aac5748c98d8246b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minLifetime: 2
+  _maxLifetime: 5
+  _colisionLock: {fileID: 4149051918593390914}
+--- !u!114 &4149051918593390914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6311764740127809739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e74749d5d39c8349b9fd92f87e6ca83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cube: {fileID: -395572186402713347}
+  _colors:
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 1, b: 0, a: 1}
+  - {r: 0, g: 0, b: 1, a: 1}
+  - {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _boxCollider: {fileID: 4764460164366377320}

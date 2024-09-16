@@ -1,56 +1,45 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Pool : MonoBehaviour
+public class Pool<T>
 {
-    [SerializeField] private Drop _drop;
-
-    private Queue<Drop> _pool;
+    private readonly Func<T> _preload;
+    private readonly Action<T> _getAction;
+    private readonly Action<T> _returnAction;
+    private Queue<T> _pool = new Queue<T>();
+    private List<T> _active = new List<T>();
     private int _count = 0;
 
-    public event Action<int> ChangeCount;
-    public event Action<int> ChangeCiuntActiv;
+    public event Action<int> ChangedCount;
+    public event Action<int> ChangedCountActive;
+    public event Action<int> ChangedCountCreat;
 
-    private void Awake()
+    public Pool(Func<T> preload, Action<T> getAction, Action<T> returnAction)
     {
-        _pool = new Queue<Drop>();
+        _preload = preload;
+        _getAction = getAction;
+        _returnAction = returnAction;
     }
 
-    public Drop Get()
+    public T Get()
     {
-        if (_pool.Count == 0)
-        {
-            Drop drop = Instantiate(_drop);
-            drop.SetPool(this);
+        T item = _pool.Count > 0 ? _pool.Dequeue() : _preload();
+        _getAction(item);
+        _active.Add(item);
+        _count++;
 
-            if (drop is Cube)
-            {
-                TryGetComponent<BombGenerator>(out BombGenerator bombGenerator);
-                drop.SetBombGenerator(bombGenerator);
-            }
+        ChangedCount?.Invoke(_count);
+        ChangedCountActive?.Invoke(_active.Count);
+        ChangedCountCreat?.Invoke(_active.Count + _pool.Count);
 
-            _count++;
-            ChangeCount?.Invoke(_count);
-            ChangeCiuntActiv?.Invoke(GetCountActiv());
-
-            return drop;
-        }
-
-        ChangeCiuntActiv?.Invoke(GetCountActiv() - 1);
-
-        return _pool.Dequeue();
+        return item;
     }
 
-    public void Put(Drop drop)
+    public void Return(T item)
     {
-        _pool.Enqueue(drop);
-        drop.gameObject.SetActive(false);
-        ChangeCiuntActiv?.Invoke(GetCountActiv());
-    }
-
-    private int GetCountActiv()
-    {
-        return _count - _pool.Count;
+        _returnAction(item);
+        _pool.Enqueue(item);
+        _active.Remove(item);
+        ChangedCountActive?.Invoke(_active.Count);
     }
 }

@@ -2,40 +2,36 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(Rigidbody))]
 public class Cube : Drop
 {
-    private ColisionLock _colisionLock;
+    [SerializeField] private ColisionLock _colisionLock;
+
     private Color _defaultColor;
     private Renderer _renderer;
     private BombGenerator _bombGenerator;
-    private bool _canChange = true;
 
     private void Awake()
     {
-        _colisionLock = GetComponent<ColisionLock>();
         _renderer = GetComponent<Renderer>();
         _defaultColor = _renderer.material.color;
     }
 
     public void SetColor(Color color)
     {
-        if (_canChange)
-        {
-            _renderer.material.color = color;
-            _canChange = false;
-            _colisionLock.enabled = true;
-        }
+        _renderer.material.color = color;
+        _colisionLock.SetAbilityCollide(false);
     }
 
     public void ResetColor()
     {
         _renderer.material.color = _defaultColor;
-        _canChange = true;
+        _colisionLock.SetAbilityCollide(true);
     }
 
-    public override void SetBombGenerator(BombGenerator bombGenerator)
+    public void SetBombGenerator(BombGenerator generator)
     {
-        _bombGenerator = bombGenerator;
+        _bombGenerator = generator;
     }
 
     protected override IEnumerator ReturneePool()
@@ -46,8 +42,7 @@ public class Cube : Drop
         yield return seconds;
 
         ResetColor();
-        _colisionLock.enabled = false;
-        _pool.Put(this);
-        _bombGenerator.Spawn(transform.position);
+        _bombGenerator.Creat(transform.position);
+        _pool.Return(this);
     }
 }
