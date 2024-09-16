@@ -1,18 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
+[RequireComponent(typeof(TextMeshProUGUI))]
 public class View : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] protected Generator _generator;
+
+    private TextMeshProUGUI _text;
+
+    private void Awake()
     {
-        
+        _text = GetComponent<TextMeshProUGUI>();
     }
 
-    // Update is called once per frame
-    void Update()
+    protected void ChangeText(int count)
     {
-        
+        _text.text = count.ToString();
     }
 }
